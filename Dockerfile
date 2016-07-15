@@ -45,5 +45,6 @@ WORKDIR /app
 RUN git clone https://git.oschina.net/rushmore/zbus.git
 WORKDIR /app/zbus/zbus-dist/bin
 RUN cat zbus.sh | col -b > zbus2.sh
-RUN chmod a+x zbus2.sh
+RUN cat tracker.sh | col -b > tracker2.sh
+RUN chmod a+x zbus2.sh && chmod a+x tracker2.sh
 ENTRYPOINT ["./zbus2.sh"]
