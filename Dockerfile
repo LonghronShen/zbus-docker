@@ -48,5 +48,4 @@ WORKDIR /app/zbus/zbus-dist/bin
 RUN cat zbus.sh | col -b > zbus2.sh && cat tracker.sh | col -b > tracker2.sh
 RUN sed 's:#/usr/bin:#!/usr/bin/env bash:g' <zbus2.sh >zbus3.sh && sed 's:#/usr/bin:#!/usr/bin/env bash:g' <tracker2.sh >tracker3.sh
 RUN chmod a+x zbus3.sh && chmod a+x tracker3.sh
-RUN rm zbus.sh && zbus2.sh && tracker.sh && tracker2.sh && mv zbus3.sh zbus.sh && mv tracker3.sh tracker.sh
-ENTRYPOINT ["./zbus.sh"]
+ENTRYPOINT ["./zbus3.sh"]
