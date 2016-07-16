@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 		xz-utils \
 		git \
 		bsdmainutils \
+		coreutils \
 	&& rm -rf /var/lib/apt/lists/*
 
 # Default to UTF-8 file.encoding
@@ -44,7 +45,8 @@ RUN set -x \
 WORKDIR /app
 RUN git clone https://git.oschina.net/rushmore/zbus.git
 WORKDIR /app/zbus/zbus-dist/bin
-RUN cat zbus.sh | col -b > zbus2.sh
-RUN cat tracker.sh | col -b > tracker2.sh
-RUN chmod a+x zbus2.sh && chmod a+x tracker2.sh
-ENTRYPOINT ["./zbus2.sh"]
+RUN cat zbus.sh | col -b > zbus2.sh && cat tracker.sh | col -b > tracker2.sh
+RUN sed 's:#/usr/bin:#!/usr/bin/env bash:g' <zbus2.sh >zbus3.sh && sed 's:#/usr/bin:#!/usr/bin/env bash:g' <tracker2.sh >tracker3.sh
+RUN chmod a+x zbus3.sh && chmod a+x tracker3.sh
+RUN rm zbus.sh && zbus2.sh && tracker.sh && tracker2.sh && mv zbus3.sh zbus.sh && mv tracker3.sh tracker.sh
+ENTRYPOINT ["./zbus.sh"]
