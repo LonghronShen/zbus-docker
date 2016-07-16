@@ -46,6 +46,6 @@ WORKDIR /app
 RUN git clone https://git.oschina.net/rushmore/zbus.git
 WORKDIR /app/zbus/zbus-dist/bin
 RUN cat zbus.sh | col -b > zbus2.sh && cat tracker.sh | col -b > tracker2.sh
-RUN sed 's:#/usr/bin:#!/usr/bin/env bash:g' <zbus2.sh >zbus3.sh && sed 's:#/usr/bin:#!/usr/bin/env bash:g' <tracker2.sh >tracker3.sh
+RUN sed 's:#/usr/bin:#!/bin/sh:g' <zbus2.sh >zbus3.sh && sed 's:#/usr/bin:#!/bin/sh:g' <tracker2.sh >tracker3.sh
 RUN chmod a+x zbus3.sh && chmod a+x tracker3.sh
 CMD ["./zbus3.sh"]
